@@ -173,6 +173,8 @@ gulp.task('vulcanize', function () {
   return gulp.src('dist/index.html')
     .pipe(polybuild({maximumCrush: true}))
     .pipe(gulp.dest('dist/'));
+}).on( "error", function( err ) {
+  console.log( err );
 });
 
 // If you require more granular configuration of Vulcanize
