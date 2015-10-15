@@ -2,10 +2,11 @@ var express = require('express');
 var app = express();
 
 // static content
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/dist'));
+app.use(express.static('public'));
 
 // let pushState and the router do the navigation. return index.html for all non-static-content routes.
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
