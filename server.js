@@ -3,7 +3,7 @@ var app = express();
 
 // static content
 app.use(express.static(__dirname + '/dist'));
-app.use(express.static('public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 // let pushState and the router do the navigation. return index.html for all non-static-content routes.
 app.get('/', function(req, res) {
