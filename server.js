@@ -3,7 +3,7 @@ var app = express();
 
 // static content
 app.use(express.static(path.join(__dirname, '/dist')));
-app.use('bower_components',  express.static(path.join(__dirname, '/bower_components')));
+app.use(express.static(path.join(__dirname, '/bower_components')));
 app.use(app.router);
 app.use(express.logger());
 
