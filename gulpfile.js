@@ -171,6 +171,12 @@ gulp.task('html', function () {
 // scripts and CSS for you.
 gulp.task('vulcanize', function () {
   return gulp.src('dist/index.html')
+    .pipe($.vulcanize({
+      dest: DEST_DIR,
+       abspath: '',
+       excludes: [],
+       stripExcludes: false
+    }))
     .pipe(polybuild({maximumCrush: true}))
     .pipe(gulp.dest('dist/'));
 });
