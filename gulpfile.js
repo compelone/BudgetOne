@@ -172,7 +172,7 @@ gulp.task('html', function () {
 gulp.task('vulcanize', function () {
   return gulp.src('dist/index.html')
     .pipe($.vulcanize({
-      dest: DEST_DIR,
+      dest: 'dist/',
        abspath: '',
        excludes: [],
        stripExcludes: false
