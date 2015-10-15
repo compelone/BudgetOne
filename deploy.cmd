@@ -103,7 +103,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
-)
+) 
 
 :: 4. Build the webclient
 IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
