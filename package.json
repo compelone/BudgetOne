@@ -37,6 +37,7 @@
     "npm": ">=3.3.0"
   },
   "dependencies": {
+    "bower": "^1.5.3",
     "clone": "^1.0.2",
     "clone-stats": "0.0.1",
     "express": "^4.13.3",
