@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <template is="dom-repeat" items="[[accounts]]" as="account">
         <h2>[[account.name]]</h2>
+        <p>[[account.accountNumber]]</p>
     </template>
   </template>
   <script>
@@ -40,11 +41,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
 
-      budgetOneFirebaseRef: new Firebase('https://dazzling-torch-4714.firebaseio.com'),
-
 		  ready: function() {
         var self = this;
-				this.budgetOneFirebaseRef.on('value', function(snapshot) {
+				budgetOneFirebase.on('value', function(snapshot) {
           if (snapshot.val() !== null)
           {
             var databaseAccounts = snapshot.val().accounts;
