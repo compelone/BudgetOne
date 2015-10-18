@@ -20,5 +20,9 @@
     "Platform": true,
     "page": true,
     "app": true
+  },
+  "predef": {
+      "Firebase": false
   }
 }
+

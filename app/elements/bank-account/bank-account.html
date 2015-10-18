@@ -9,7 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
-<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 
 <dom-module id="bank-account">
   <template>
@@ -24,7 +23,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
   <script>
 
-  var budgetOneFirebaseRef = new Firebase('https://dazzling-torch-4714.firebaseio.com');
 
   (function() {
     'use strict';
@@ -37,24 +35,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Array,
           notify: true,
           value: function() {
-              return [
-									{name: 'PNC'},
-									{name: 'PNC Other'}
-							];
+              return [ ];
           }
-        },
-
-        addAccounts: function() {
-            budgetOneFirebaseRef.on('value', function(snapshot) {
-              console.log(snapshot.val().accounts);
-              snapshot.val().accounts.forEach(function(element, index) {
-                  this.accounts.push(element);
-                  console.log(element);
-                  console.log(index);
-              });
-            });
         }
-      }
+      },
+
+      budgetOneFirebaseRef: new Firebase('https://dazzling-torch-4714.firebaseio.com'),
+
+		  ready: function() {
+        var self = this;
+				this.budgetOneFirebaseRef.on('value', function(snapshot) {
+          if (snapshot.val() !== null)
+          {
+            var databaseAccounts = snapshot.val().accounts;
+            databaseAccounts.forEach(function(item, index) {
+              console.log(item);
+
+              self.push('accounts', item);
+            });
+          }
+				});
+		  }
     });
   })();
   </script>
