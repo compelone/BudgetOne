@@ -17,6 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+
+    <p>[[userId]]</p>
+
     <template is="dom-repeat" items="[[accounts]]" as="account">
         <h2>[[account.name]]</h2>
         <p>[[account.accountNumber]]</p>
@@ -24,10 +27,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
   <script>
 
-  var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
-
   (function() {
     'use strict';
+
+    var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
+    var authObject = JSON.parse(localStorage.getItem('budgetOneAuth'));
 
     Polymer({
       is: 'bank-account',
@@ -39,6 +43,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: function() {
               return [ ];
           }
+        },
+        userId: {
+          type: String,
+          value: authObject.uid,
+          notify: true
         }
       },
 
@@ -50,8 +59,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var databaseAccounts = snapshot.val().accounts;
             self.splice('accounts', 0, self.accounts.length);
             databaseAccounts.forEach(function(item) {
-              console.log(item);
-
               self.push('accounts', item);
             });
           }

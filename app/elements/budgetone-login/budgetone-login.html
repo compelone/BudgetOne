@@ -21,17 +21,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <h2>Login</h2>
-    <form is="iron-form" id="form">
-      <paper-input id="email" name="email" label="email" value="{{email}}" type="email" auto-validate required error-message="Please, enter your email address"></paper-input>
-      <paper-input id="password" name="password" label="password" value="{{password}}" type="password" auto-validate required error-message="Please, enter your password"></paper-input>
+    <template is="dom-if" if="{{isAuthenticated}}">
+      <span>You are already authenticated!</span>
+    </template>
+    <template is="dom-if" if="{{!isAuthenticated}}">
+      <form is="iron-form" id="form">
+        <paper-input id="email" name="email" label="email" value="{{email}}" type="email" auto-validate required error-message="Please, enter your email address"></paper-input>
+        <paper-input id="password" name="password" label="password" value="{{password}}" type="password" auto-validate required error-message="Please, enter your password"></paper-input>
 
-      <paper-button raised
-          on-click="handleSubmit">Submit</paper-button>
-    </form>
+        <paper-button raised
+            on-click="handleSubmit">Submit</paper-button>
+      </form>
+    </template>
   </template>
   <script>
-
-  //var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
 
   (function() {
     'use strict';
@@ -48,14 +51,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         password: {
           type: String,
           notify: true
+        },
+        isAuthenticated: {
+          type: Boolean,
+          value: false,
+          notify: true
         }
       },
 
       handleSubmit: function(e) {
         e.preventDefault();
 
-        console.log(this.email);
-        console.log(this.password);
+        self = this;
+        var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
+
+        budgetOneFirebase.authWithPassword({
+          email    : this.email,
+          password : this.password
+        }, function(error, authData) {
+          if (error) {
+            console.log('Login Failed!', error);
+          } else {
+            localStorage.setItem('budgetOneAuth', JSON.stringify(authData));
+            self.isAuthenticated = true;
+          }
+        });
       }
     });
   })();
