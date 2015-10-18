@@ -46,7 +46,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         userId: {
           type: String,
-          value: authObject.uid,
+          value: function() {
+            if (authObject === null) {
+                return '';
+            }
+            else {
+              return authObject.uid;
+            }
+          },
           notify: true
         }
       },

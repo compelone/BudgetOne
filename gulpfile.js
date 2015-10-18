@@ -24,6 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
+var babel = require("gulp-babel");
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -296,7 +297,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'rename-index', 'remove-old-build-index', // 'cache-config',
+    'vulcanize', 'rename-index', 'remove-old-build-index', // 'cache-config',
     cb);
 });
 
