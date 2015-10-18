@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       handleSubmit: function(e) {
         e.preventDefault();
 
-        self = this;
+        //self = this;
         var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
 
         budgetOneFirebase.authWithPassword({
@@ -73,7 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             console.log('Login Failed!', error);
           } else {
             localStorage.setItem('budgetOneAuth', JSON.stringify(authData));
-            self.isAuthenticated = true;
+            //self.isAuthenticated = true;
           }
         });
       }
