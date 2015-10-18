@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <p>[[userId]]</p>
+    <p>{{userId}}</p>
 
     <template is="dom-repeat" items="[[accounts]]" as="account">
         <h2>[[account.name]]</h2>
@@ -31,12 +31,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'use strict';
 
     var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
-    var authObject = JSON.parse(localStorage.getItem('budgetOneAuth'));
 
     Polymer({
       is: 'bank-account',
 
       properties: {
+
         accounts: {
           type: Array,
           notify: true,
@@ -44,22 +44,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               return [ ];
           }
         },
+
         userId: {
           type: String,
-          value: function() {
-            if (authObject === null) {
-                return '';
-            }
-            else {
-              return authObject.uid;
-            }
-          },
-          notify: true
+          reflectToAttribute: true
         }
       },
 
 		  ready: function() {
         var self = this;
+
 				budgetOneFirebase.on('value', function(snapshot) {
           if (snapshot.val() !== null)
           {

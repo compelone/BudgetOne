@@ -42,6 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     page('/accounts', scrollToTop, function() {
       app.route = 'accounts';
+      app.params = localStorage.getItem('budgetOneAuth');
     });
 
     // add #! before urls

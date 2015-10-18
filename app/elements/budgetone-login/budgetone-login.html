@@ -39,13 +39,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   (function() {
     'use strict';
 
+    var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
+
     Polymer({
       is: 'budgetone-login',
 
       properties: {
         email: {
           type: String,
-          value: 'lprivott@compelone.com',
           notify: true
         },
         password: {
@@ -54,7 +55,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
         isAuthenticated: {
           type: Boolean,
-          value: false,
+          value: function() {
+            var auth = localStorage.getItem('budgetOneAuth');
+            if (!auth) {
+              return true;
+            } else {
+              return false;
+            }
+          },
           notify: true
         }
       },
@@ -63,7 +71,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         e.preventDefault();
 
         var self = this;
-        var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
 
         budgetOneFirebase.authWithPassword({
           email    : this.email,
