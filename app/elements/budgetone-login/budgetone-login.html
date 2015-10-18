@@ -1,0 +1,63 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="..\..\bower_components/iron-form/iron-form.html">
+<link rel="import" href="..\..\bower_components/paper-input/paper-input.html">
+<link rel="import" href="..\..\bower_components/paper-button/paper-button.html">
+
+<dom-module id="budgetone-login">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Login</h2>
+    <form is="iron-form" id="form">
+      <paper-input id="email" name="email" label="email" value="{{email}}" type="email" auto-validate required error-message="Please, enter your email address"></paper-input>
+      <paper-input id="password" name="password" label="password" value="{{password}}" type="password" auto-validate required error-message="Please, enter your password"></paper-input>
+
+      <paper-button raised
+          on-click="handleSubmit">Submit</paper-button>
+    </form>
+  </template>
+  <script>
+
+  var budgetOneFirebase = new Firebase('https://dazzling-torch-4714.firebaseio.com');
+
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'budgetone-login',
+
+      properties: {
+        email: {
+          type: String,
+          value: 'lprivott@compelone.com',
+          notify: true
+        },
+        password: {
+          type: String,
+          notify: true
+        }
+      },
+
+      handleSubmit: function(e) {
+        e.preventDefault();
+
+        console.log(this.email);
+        console.log(this.password);
+      }
+    });
+  })();
+  </script>
+</dom-module>
