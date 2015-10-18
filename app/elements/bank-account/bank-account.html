@@ -48,7 +48,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           if (snapshot.val() !== null)
           {
             var databaseAccounts = snapshot.val().accounts;
-            databaseAccounts.forEach(function(item, index) {
+            self.splice('accounts', 0, self.accounts.length);
+            databaseAccounts.forEach(function(item) {
               console.log(item);
 
               self.push('accounts', item);
