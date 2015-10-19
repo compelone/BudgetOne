@@ -42,7 +42,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     page('/accounts', scrollToTop, function() {
       app.route = 'accounts';
-      app.params = localStorage.getItem('budgetOneAuth');
+      var auth = JSON.parse(localStorage.getItem('budgetOneAuth'));
+      console.log(auth);
+      if (auth) {
+        app.params = auth.uid;
+      }
     });
 
     // add #! before urls
