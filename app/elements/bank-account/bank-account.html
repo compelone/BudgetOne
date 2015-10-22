@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link href="..\..\bower_components/iron-icons/iron-icons.html" rel="import">
 
 <dom-module id="bank-account">
   <template>
@@ -16,12 +17,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      .danger {
+        color: red;
+      }
+      .small-size {
+        width: 16px;
+        height: 16px;
+      }
     </style>
 
     <p>{{userId}}</p>
 
     <template is="dom-repeat" items="[[accounts]]" as="account">
-        <h2>[[account.name]]</h2>
+        <h2>[[account.name]]<span><paper-icon-button icon="clear" class="danger small-size" on-click="deleteAccount"></paper-icon-button></span></h2>
         <p>[[account.accountNumber]]</p>
     </template>
   </template>
@@ -63,8 +71,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               self.push('accounts', item);
             });
           }
-				});
-		  }
+				});       
+		  },
+      
+      deleteAccount: function(e) {
+        var key = e.model.__data__.__key__;
+        console.log(key);
+        console.log(budgetOneFirebase);
+        budgetOneFirebase.child('accounts/' + key).remove();
+      }
     });
   })();
   </script>
